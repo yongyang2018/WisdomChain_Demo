@@ -83,7 +83,6 @@ class Common{
                 return true;//存在
             }
         }
-        console.log("______>"+global.finish);
         for(var x=0;x<global.finish.length;x++){
             if(global.finish[x].id==id){
                 return true;
@@ -127,7 +126,6 @@ class Common{
 
     joinUndone(address){
         var address=this.getaddToAddress(address);
-        console.log(address);
         var undone=global.undone[0];
         var prikeyArray=undone.prikeyArray;
         prikeyArray.push(address.prikey);

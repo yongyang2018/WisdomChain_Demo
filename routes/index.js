@@ -11,7 +11,7 @@ const schedule = require('node-schedule');
 var list=[];
 
 const  scheduleCronstyle = ()=>{
-  //每分钟的每5秒定时执行一次:
+    //每5秒定时执行一次:
     schedule.scheduleJob('*/5 * * * * *',async function(){
         if(global.undone.length>0){
           var undone=global.undone[0];
@@ -67,7 +67,6 @@ router.get('/getfromSend', function(req, res, next) {
     info.min=tran.min;
     info.partner=tran.participant;
     info.type=true;
-    console.log(tran);
     if(tran.type<2){//未上链
       if(common.checkTransaction(tran.id)==0){
         info.statue=1;//已满足
