@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登记信息成功</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/header.css" />
+		<style type="text/css">
+			html,body{
+				height: 100%;
+			}
+			body{
+				background-image: url(/images/sign-beijing.png);
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+			}
+			.success-title{
+				font-size: 24px;
+				margin: 50px 0;
+			}
+			.outer>img{
+				width: 140px;
+				height: 140px;
+			}
+			.val{
+				margin-top: 30px;
+			}
+			.but-confirm{
+				padding: 10px 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="sign-header"><%- include('./header.ejs'); %></div>
+
+		<div class="wid-1200">
+			<div class="">
+				<div class="outer">
+					
+					<img src="/images/success.png" >
+					<div class="success-title">
+						<div class="">
+							恭喜您成功参与会签合同！
+						</div>
+						<div class="val">
+							会签合同ID：<%= id %>
+						</div>
+					</div>
+					<div class="text-center">
+						<button class="box-but but-confirm" id="confirm">确认</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			window.onload = function() {
+				
+					document.getElementById("confirm").onclick = function() {
+						window.location.href='/';
+					}
+				}
+		</script>
+	</body>
+</html>

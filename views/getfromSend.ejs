@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>会签合同</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/header.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/countersign-contract.css" />
+	</head>
+	<body>
+		<div id="sign-header">
+			<%- include('./header.ejs'); %>
+		</div>
+		<div class="wid-1200">
+			<div class="">
+				<div class="outer">
+					<div class="box-frame">
+						<div class="register-title">
+							请认真填写以下表格内容，以便数据真实可靠
+						</div>
+						<% if(info.type){ %>
+							<div class="register-kv">	
+								<div class="register-item">
+									<span class="">合同ID：</span>
+									<input type="text" id="txt" required="required" value="<%= info.id %>" disabled="disabled"/>
+								</div>
+								<div class="register-item">
+									<span class="">合同信息：</span>
+									<input type="text" id="txtinfo" required="required" value="<%= info.message %>" disabled="disabled"/>
+								</div>
+								<div class="register-span-textarea">
+									<span class="">合同内容：</span>
+									<textarea rows="5" cols="76" disabled="disabled" id="txtmessage"><%= info.text %></textarea>
+								</div>
+								<div class="register-item">
+									<span class="">参与者：</span>
+									<from style="width: 85%;">
+									<% for(var x=0;x<info.partner.length;x++){ %>
+										<%= info.partner[x] %>
+										</br>
+									<% } %>
+									</from>
+								</div>
+								<div class="register-item"style="flex: 1;">
+									<span class="">满足条件：</span>
+									<span style="width: 32%;">该合同生效后，需会签数达到</span>
+									<input type="text" class="countersign-input" id="num" value="<%= info.min %>" disabled="disabled"/>
+									<span style="margin-left: 10px;width: 20%;">个时才能履行合同</span>	
+								</div>
+							</div>
+							<div class="text-center">
+								<% if(info.statue==0){ %>
+									<button class="box-but" onclick="confirm()" disabled="disabled" style="background-color: #ebebe4;color: #545454;">会签合同正在进行中</button>
+								<% } else if(info.statue==1) { %>
+									<button class="box-but" onclick="send()" >会签合同上链</button>
+								<% } else { %>
+									<button class="box-but" onclick="send()" disabled="disabled" style="background-color: #ebebe4;color: #545454;">会签合同上链确认中</button>
+								<% } %>
+							</div>
+						<% } else { %>
+							<div class="register-kv">
+								<div class="register-item">
+									<span class="">合同ID：</span>
+									<input type="text" id="txt" required="required" value="<%= info.id %>" disabled="disabled"/>
+								</div>
+								<div class="register-item">
+									<span class="">合同信息：</span>
+									<input type="text" id="txtinfo" required="required" value="" />
+								</div>
+								<div class="register-span-textarea">
+									<span class="">合同内容：</span>
+									<textarea rows="5" cols="76" id="txtmessage"></textarea>
+								</div>
+								<div class="register-item">
+									<span class="">参与者：</span>
+									<form>
+										<input type="checkbox" name="vehicle[]">
+										<%= companyA %><br />
+										<input type="checkbox" name="vehicle[]"> 
+										<%= companyB %><br />
+										<input type="checkbox" name="vehicle[]">
+										<%= companyC %><br />
+									</form>
+								</div>
+								<div class="register-item"style="flex: 1;">
+									<span class="">发布条件：</span>
+									<span style="width: 32%;">该合同生效后，需会签数达到</span>
+									<input type="text" class="countersign-input" id="num" />
+									<span style="margin-left: 10px;width: 20%;">个时才能履行合同</span>	
+								</div>
+							</div>
+							<div class="text-center">
+								<button class="box-but" onclick="confirm()">确认</button>
+							</div>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		
+		function confirm() {
+			var id=$('#txt').val();
+			var txtinfo = $("#txtinfo").val();//合同信息
+			var txtmessage = $("#txtmessage").val();//合同内容
+			var num = document.getElementById("num").value.replace(/[^1-9]/g, '');//发布条件
+			if(txtinfo ==""|| txtinfo == undefined || txtinfo == null){
+				alert("请输入合同信息")
+				return;
+			}
+			if(txtmessage ==""|| txtmessage == undefined || txtmessage == null){
+				alert("请输入合同内容")
+				return;
+			}
+			if (num ==""||num == undefined || num == null || num>3) {
+				alert("请正确输入发布条件")
+				return;
+			}
+			var statue=true;
+			var selectname='';
+			var checkArray=$('input[name="vehicle[]"');
+			var index;
+			for(var x=0;x<checkArray.length;x++){
+				if($(checkArray[x]).is(":checked")){
+					index=x+1;
+					statue=false;
+					selectname+=index+',';
+				}
+			}
+			if(statue){
+				alert("至少选择一个参与者")
+				return;
+			}
+			selectname=selectname.substring(0,selectname.length-1);
+			if(num>selectname.split(',').length+1){
+				alert("会签数大于参与者数量，请重新输入会签数")
+				return;
+			}
+			window.location.href="/sendCountersign?id="+id+'&txtinfo='+txtinfo+'&txtmessage='+txtmessage+'&selectname='+selectname+'&num='+num;
+		}
+		
+		function send(){
+			$.ajax({
+				url: "send" ,
+				success: function (result) {
+					if (result == true) {
+						alert("广播成功，等待确认中")
+						window.location.href="/";
+					}else{
+						alert("广播失败，请稍后再试！");
+					}
+				}
+			});
+		}
+				
+		</script>
+		
+	</body>
+</html>

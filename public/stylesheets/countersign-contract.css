@@ -1,0 +1,88 @@
+*{margin: 0;padding: 0;}
+@charset "utf-8";
+body,html{height: 100%;}
+
+body{
+	background-image: url(/images/sign-beijing.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+.register-title{
+	font-size: 24px;
+	margin: 50px 0;
+	text-align: center;
+}
+.register-kv{
+	font-size: 20px;
+	color:#333333;
+	display: flex;
+	flex-direction: column;
+	margin: 0 50px;
+}
+.register-item{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.register-item>span{
+	width: 15%;
+}
+.register-item>input{
+	height: 50px;
+	line-height: 50px;
+	width: 85%;
+	padding: 0 10px;
+	font-size: 20px;
+	box-shadow: 4px 4px 10px 4px rgba(4,0,0,0.25);
+	border: 0px;
+}
+.register-span-textarea{
+	width: 100%;
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.register-span-textarea>span{
+	width: 15%;
+}
+.register-item>select{
+	height: 50px;
+	line-height: 50px;
+	width: 85%;
+	padding: 0 10px;
+	font-size: 20px;
+	box-shadow: 4px 4px 10px 4px rgba(4,0,0,0.25);
+	border: 0px;
+}
+textarea{
+	width: 85%;
+	padding: 0 10px;
+	border: 0px;
+	font-size: 20px;
+	box-shadow: 4px 4px 10px 4px rgba(4,0,0,0.25);
+}
+.wid-1200{
+	text-align: left;
+}
+.countersign-input{
+	padding: 0 5px !important;
+	width: 35px !important;
+	height: 35px !important;
+	box-shadow: 0 !important;
+	border: 1px solid #333333 !important;
+	text-align: center;
+}
+
+#inputtext{
+	height: 50px;
+    line-height: 50px;
+    width: 97%;
+    padding: 0 10px;
+    font-size: 20px;
+    box-shadow: 4px 4px 10px 4px rgba(4,0,0,0.25);
+	border: 0px;
+	margin-bottom: 5%;
+}

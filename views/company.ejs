@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>多签发布</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/company.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+		<div class="home-box">
+			<ul class="section-ui">
+				<li>
+					<% if(type) { %>
+					<div class="alarm">
+						1
+					</div>
+					<% } %>
+					<div class="li-div-title" id="publish">
+						<img src="/images/sign-xiaoxi.png" >
+						<a class="item-title"  href="javascript:void(0);" onclick="GoToNext()">发布会签合同</a>
+					</div>
+				</li>
+				<li>
+					<div class="li-div-title">
+						<img src="/images/sign-chaxun.png" >
+						<a class="item-title" href="/getselect">查看会签状态</a>
+					</div>
+				</li>
+
+			</ul>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		function GoToNext(){
+				if(<%= type %>){
+					window.location.href="/message?address=<%= address %>";
+				}else{
+					alert("无新会签通知");
+				}
+			}
+	</script>
+</html>
