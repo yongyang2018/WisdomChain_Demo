@@ -9,7 +9,7 @@ const Common=require('./routes/countersign/Common')
 var common=new Common();
 
 var indexRouter = require('./routes/countersign/index');
-var usersRouter = require('./routes/users');
+var inheritRouter = require('./routes/inherit/index');
 var blockRouter = require('./routes/block');
 
 var app = express();
@@ -28,8 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(path.join(__dirname, 'keystore')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/sign', indexRouter);
+app.use('/inherit', inheritRouter);
 app.use('/block', blockRouter);
 
 // catch 404 and forward to error handler

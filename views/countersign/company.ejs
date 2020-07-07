@@ -26,7 +26,7 @@
 				<li>
 					<div class="li-div-title">
 						<img src="/images/countersign/sign-chaxun.png" >
-						<a class="item-title" href="/getselect">查看会签状态</a>
+						<a class="item-title" href="/sign/getselect">查看会签状态</a>
 					</div>
 				</li>
 
@@ -37,7 +37,7 @@
 	<script type="text/javascript">
 		function GoToNext(){
 				if(<%= type %>){
-					window.location.href="/message?address=<%= address %>";
+					window.location.href="/sign/message?address=<%= address %>";
 				}else{
 					alert("无新会签通知");
 				}

@@ -28,15 +28,6 @@ const  scheduleCronstyle = ()=>{
 
 scheduleCronstyle();
 
-// router.use(function(req, res, next) {
-//   res.locals.userinfo = {
-//       userid : 123,
-//       username : "ladeng"
-//   };
-//   res.locals.test=1;
-//   next();
-// });
-
 router.get('/', function(req, res, next) {
   var id='';
   if(common.getExistUndone()){
