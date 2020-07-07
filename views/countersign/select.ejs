@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>多签管理查询</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/countersign/safe.css"/>
+	</head>
+	<body>
+		<div class="safe-conent">
+			<div class="top_right">
+				<a><img src="/images/countersign/set.png"></a>
+			</div>
+		
+			<div class="safe-item">
+
+				<div class="safe-title">
+					欢迎使用资产多签管理查询网站
+				</div>
+				<div class="safe-slogan">
+					宣传标语宣传标语宣传标语宣传标语宣传标语宣传标语宣传标语宣传标语宣传标。
+				</div>
+				<div class="safe-wrap">
+					<input type="text" placeholder="请输入正确的查询号" id="txt"/>
+					<div class="safe-wrap-img" id="safe-search">
+						<img src="/images/countersign/addressee-search.png">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById("safe-search").onclick = function() {
+					confirm();
+				}
+			}
+			function confirm(){
+				
+				var txt = $('#txt').val();//input的id
+				
+				if(txt ==""|| txt == undefined || txt == null){
+					alert("请输入查询号")
+					return;	
+				}
+				$.ajax({
+					url: "selectID?id=" + txt,
+					success: function (result) {
+						if (result == true) {
+							window.location.href="/select?id="+txt;
+						}else{
+							alert("该合同ID不存在");
+						}
+					}
+				});
+			}
+			
+		</script>
+	</body>
+</html>

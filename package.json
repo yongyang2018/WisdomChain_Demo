@@ -3,10 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "pkgwin": "pkg -t win ./bin/www",
-    "pkg-linux": "pkg -t linux packages.json",
-    "pkg-macos": "pkg -t macos packages.json"
+    "start": "node ./bin/wdcdemo"
   },
   "dependencies": {
     "argon2": "^0.26.2",
@@ -25,11 +22,11 @@
     "request": "^2.88.2",
     "string-random": "^0.1.3"
   },
-  "bin": "./bin/www",
+  "bin": "./bin/wdcdemo",
   "pkg": {
     "assets": [
-      "public/**",
-      "views/**",
+      "public/**/*",
+      "views/**/*",
       "keystore/**"
     ]
   }

@@ -5,10 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
 const fs=require('fs');
-const Common=require('./routes/Common')
+const Common=require('./routes/countersign/Common')
 var common=new Common();
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/countersign/index');
 var usersRouter = require('./routes/users');
 var blockRouter = require('./routes/block');
 
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'keystore')));
+// app.use(express.static(path.join(__dirname, 'keystore')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
