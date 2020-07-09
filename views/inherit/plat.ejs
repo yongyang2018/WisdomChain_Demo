@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>xx平台</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/inherit/header.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/inherit/select.css"/>
+	</head>
+	<body>
+		<div id="gift-header"><%- include('./gift-header.ejs'); %></div>
+		
+		<div id="" class="wid-1200">
+			<div class="">
+				<div class="outer">
+					<div class="box-frame">
+						<div class="select-sender-title">
+							登记信息
+						</div>
+						<div class="select-sender-kv" style="font-size: 22px;">
+							<div class="logistics-item">
+								<span>登记人：</span>
+								<span><%= traninfo.name %></span>
+							</div>
+							<div class="select-sender-info">
+							<span>赠与内容：</span>
+								<span class="span-flex"><%= traninfo.message %></span>
+							</div>
+
+							<div class="select-sender-info">
+								<span>赠送对象：</span>
+								<span class="ellipsis span-flex"><%= to %></span>
+							</div>
+							<div class="select-sender-info">
+								<span>赠送条件：</span>
+								<span>当哈希高度大于<%= traninfo.height %></span>
+							</div>
+							
+						</div>
+						<div class="text-center">
+							<button class="box-but" id="but-select-sender">存证上链</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			window.onload = function() {
+					document.getElementById("but-select-sender").onclick = function() {
+						$.ajax({
+							url: "checkTransfer",
+							success: function (result) {
+								if (result) {
+									$.ajax({
+										url: "saveGet",
+										success: function (result) {
+											if (result!=null) {
+												window.location.href="/inherit/getsuccess?id=2&txHash="+result;
+											}else{
+												alert("广播失败，请稍后再试！");
+												return;
+											}
+										}
+									});
+								}else{
+									alert("登记数据还未确认，请稍后再试！");
+									return;
+								}
+							}
+						});
+					}
+				}
+		</script>
+	</body>
+</html>

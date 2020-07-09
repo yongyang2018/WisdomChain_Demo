@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>资产赠与首页</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/inherit/home.css" />
+	</head>
+	<body>
+		<div class="home-box">
+			<ul class="section-ui">
+				<li>
+					<div class="li-div-title">
+						<img src="/images/inherit/gift-dengji.png" >
+						<a class="item-title" href="/inherit/getfrom">登记方</a>
+					</div>
+				</li>
+				<li>
+					<div class="li-div-title">
+						<img src="/images/inherit/gift-pingtai.png" >
+						<a class="item-title" onclick="into()">xx平台</a>
+					</div>
+				</li>
+
+				<li>
+					<div class="li-div-title">
+						<img src="/images/inherit/gift-jicheng.png" >
+						<a class="item-title" href="/inherit/select">继承人</a>
+					</div>
+				</li>
+
+			</ul>
+			<div class="paompt">
+				<div class="paompt-item">
+					<span>用户分配地址：</span>
+					<span><%= from %></span>
+				</div>
+				<div class="paompt-item">
+					<span>航空公司分配地址：</span>
+					<span><%= inter %></span>
+				</div>
+				<div class="paompt-item">
+					<span>保险公司分配地址：</span>
+					<span><%= to %></span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function into(){
+			$.ajax({
+				url: "checkTransfer",
+				success: function (result) {
+					if (!result) {
+						window.location.href="/inherit/getInto";
+					}else{
+						alert("暂无登记信息，请稍后再试！");
+					}
+				}
+			});
+		}
+	</script>
+</html>

@@ -8,8 +8,6 @@ var rpc=new RPC();
 const random=require('string-random');
 const schedule = require('node-schedule');
 
-var list=[];
-
 const  scheduleCronstyle = ()=>{
     //每5秒定时执行一次:
     schedule.scheduleJob('*/5 * * * * *',async function(){

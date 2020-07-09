@@ -18,10 +18,24 @@ class rpc{
     return resust;
   }
 
+  async getNoncePubkeyHash(pubkeyHash){
+    var resust=await axios.post(ip+'sendNonce?pubkeyhash='+pubkeyHash)
+    .then(function (response) {
+      if(response.data.code==5000){
+        return 0;
+      }
+      return response.data.data;
+    }).catch(function (error) {
+      console.log(error);
+      return 0;
+    });
+    return resust;
+  }
+
   async sendTransaction(traninfo){
     var resust=await axios.post(ip+'sendTransaction?traninfo='+traninfo)
       .then(function (response){
-          console.log(response.data.message);
+          console.log(response.data);
           if(response.data.code==5000){
             return 0;
           }
@@ -45,7 +59,25 @@ class rpc{
       });
       return resust;
   }
+
+  async getHeight(){
+    var resust=await axios.get(ip+'height')
+      .then(function (response){
+          if(response.data.code==5000){
+            return 0;
+          }
+          return response.data.data;
+      }).catch(function (error) {
+        return 0;
+      });
+      return resust;
+  }
+
 }
+
+  
+
+
 
 var ip='http://139.129.12.159:19585/';
 

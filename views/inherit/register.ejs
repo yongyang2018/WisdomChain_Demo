@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登记页</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/inherit/header.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/inherit/register.css" />
+	</head>
+	<body>
+		<div id="gift-header"><%- include('./gift-header.ejs'); %></div>
+
+		<div class="wid-1200">
+			<div class="">
+				<div class="outer">
+					<div class="box-frame">
+						<div class="register-title">
+							请认真填写以下表格内容，以便数据真实可靠
+						</div>
+						<div class="register-kv">
+							<div class="register-item">
+								<span class="">登记姓名：</span>
+								<input type="text" id="name"/>
+							</div>
+							<div class="register-span-textarea">
+								<span class="">赠与内容：</span>
+								<textarea rows="5" cols="76" style="resize:none;" id="message"></textarea>
+							</div>
+							<div class="register-item">
+								<span class="">赠与对象：</span>
+								<input type="text" id="obj" value="<%= to %>" disabled="disabled"/>
+							</div>
+							<div class="register-item">
+								<span class="">赠与条件：</span>
+								<span style="width: 36%;">当区块高度<font style="color:red">（当前高度：<%= height %>）</font>></span>
+								<input type="text" style="width: 100px;height: 40px; text-align: center;" id="num" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" />
+							</div>
+	
+						</div>
+						<div class="text-center">
+							<button class="box-but" onclick="register()">存证上链</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+			function register(){
+				
+				var name = document.getElementById("name").value.replace(/(^\s*)|(\s*$)/g, '');//登记姓名
+				var message=$('#message').val();//赠与内容
+				var obj = document.getElementById("obj").value.replace(/(^\s*)|(\s*$)/g, '');//赠与对象
+				var num = document.getElementById("num").value;//赠与条件
+				
+				if(name ==""|| name == undefined || name == null){
+					alert("请输入登记姓名")
+					return;
+				}
+				if(message=="" || message==undefined || message==null){
+					alert("请输入赠与内容")
+					return;
+				}
+				if(obj ==""|| obj == undefined || obj == null){
+					alert("请输入赠与对象")
+					return;
+				}
+				if (num ==""||num == undefined || num == null) {
+					alert("请正确输入区块高度")
+					return;
+				}
+				$.ajax({
+					url: "saveTransfer?name="+name+"&message="+message+"&num="+num,
+					async: false, //设置为同步请求
+					success: function (result) {
+						if (result != null) {
+							alert("广播成功，等待确认中")
+							window.location.href="/inherit/getsuccess?id=1&txHash="+result;
+						}else{
+							alert("广播失败，请稍后再试！");
+						}
+					}
+				});
+			}
+		</script>
+		
+	</body>
+</html>

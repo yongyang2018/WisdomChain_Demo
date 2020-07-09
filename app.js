@@ -51,6 +51,7 @@ app.use(function(err, req, res, next) {
 global.address=[];
 global.undone=[];
 global.finish=[];
+global.inherit=[];
 
 
 function init(){
