@@ -67,11 +67,23 @@ router.get('/getInto',function(req, res, next){
 })
 
 router.get('/checkTransfer',function(req, res, next){
+    if(global.inherit.length==0){
+        res.send(true);
+        return;
+    }
     var info=global.inherit[global.inherit.length-1];
     if(info.state==0){
         res.send(false);
     }else{
         res.send(true);
+    }
+})
+
+router.get('/checkInherit',function(req, res, next){
+    if(global.inherit.length==0){
+        res.send(true);
+    }else{
+        res.send(false);
     }
 })
 

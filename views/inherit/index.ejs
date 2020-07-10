@@ -26,7 +26,7 @@
 				<li>
 					<div class="li-div-title">
 						<img src="/images/inherit/gift-jicheng.png" >
-						<a class="item-title" href="/inherit/select">继承人</a>
+						<a class="item-title" onclick="inheritor()">继承人</a>
 					</div>
 				</li>
 
@@ -50,10 +50,23 @@
 	<script type="text/javascript">
 		function into(){
 			$.ajax({
-				url: "checkTransfer",
+				url: "/inherit/checkTransfer",
 				success: function (result) {
 					if (!result) {
 						window.location.href="/inherit/getInto";
+					}else{
+						alert("暂无登记信息，请稍后再试！");
+					}
+				}
+			});
+		}
+
+		function inheritor(){
+			$.ajax({
+				url: "/inherit/checkInherit",
+				success: function (result) {
+					if (!result) {
+						window.location.href="/inherit/select";
 					}else{
 						alert("暂无登记信息，请稍后再试！");
 					}

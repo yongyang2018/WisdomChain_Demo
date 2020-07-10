@@ -50,7 +50,7 @@
 	<script type="text/javascript">
 		function into(){
 			$.ajax({
-				url: "integral/checkHotel",
+				url: "/integral/checkHotel",
 				success: function (result) {
 					if (!result) {
 						window.location.href="/integral/getSights";
@@ -63,7 +63,7 @@
 
 		function select(){
 			$.ajax({
-				url: "integral/checkSelect",
+				url: "/integral/checkSelect",
 				success: function (result) {
 					if (result) {
 						window.location.href="/integral/getSelect";
