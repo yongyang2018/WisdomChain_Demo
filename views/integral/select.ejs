@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>查询结果</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/integral/header.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/integral/select.css"/>
+	</head>
+	<body style="height: 102%;">
+		<div id="header"><%- include('./header.ejs'); %></div>
+
+		<div id="" class="wid-1200">
+			<div class="">
+				<div class="outer">
+					<div class="box-frame">
+						<div class="select-welfare-title">
+							游客查询信息
+						</div>
+						
+						<div class="">
+							<div class="user">
+								<span>用户姓名：</span>
+								<span><%= integral.hotel.name %></span>
+							</div>
+							<div class="user">
+								<span>剩余积分：</span>
+								<span id="balance"><%= integral.balance %></span>
+							</div>
+						</div>
+						
+						<div class="select-sender-menu" style="	display: flex;justify-content: center;
+							align-items: center;margin-top: 50px;">
+							<div class="select-sender-item" id="statefirst" onclick="stateFirst()" style="background-color: #333333;color: #FFFFFF;">1</div>
+							<div class="select-sender-mid"></div>
+							<div class="select-sender-item" id="statetwo" onclick="stateTwo()">2</div>
+						</div>
+						<div id="cut">
+							<div class="select-welfare-kv">
+								<div class="select-welfare-block">
+									<span>用户身份证：</span>
+									<span><%= integral.hotel.card %></span>
+								</div>
+								<div class="select-welfare-block">
+									<span>入住酒店：</span>
+									<span><%= integral.hotel.hotelname %></span>
+								</div>
+								<div class="select-welfare-block">
+									<span>发放积分：</span>
+									<span><%= integral.hotel.amount %></span>
+								</div>
+							</div>
+	
+							<div class="select-welfare-kv">
+								<div class="select-welfare-block">
+									<span>区块高度：</span>
+									<span><%= integral.hotel.blockheight %></span>
+								</div>
+								<div class="select-welfare-block">
+									<span>区块哈希：</span>
+									<span><%= integral.hotel.blockHash %></span>
+								</div>
+								<div class="select-welfare-block">
+									<span>事务哈希：</span>
+									<span><%= integral.hotel.txHash %></span>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<button class="box-but" onclick="back()">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+				function back(){
+				  location.href="/integral/";
+				}
+				
+				function stateFirst(){
+					var backcolor=$('#statefirst').css('background-color');
+					if(backcolor=='rgba(0, 0, 0, 0)'){
+						$.ajax({
+							url: "switchSelect?id=1",
+							success: function (result) {
+								$('#statefirst').css({'background-color':'rgb(51, 51, 51)','color':'rgb(255, 255, 255)'});
+								$('#statetwo').css({'background-color':'rgba(0, 0, 0, 0)','color':'rgb(0, 0, 0)'});
+								var html='<div class="select-welfare-kv">'+
+									'<div class="select-welfare-block">'+
+										'<span>用户身份证：</span>'+
+										'<span>'+ result.hotel.card +'</span>'+
+										'</div>'+
+										'<div class="select-welfare-block">'+
+											'<span>入住酒店：</span>'+
+											'<span>'+ result.hotel.hotelname +'</span>'+
+											'</div>'+
+											'<div class="select-welfare-block">'+
+												'<span>发放积分：</span>'+
+												'<span>'+ result.hotel.amount +'</span>'+
+												'</div>'+
+												'</div>'+
+												'<div class="select-welfare-kv">'+
+													'<div class="select-welfare-block">'+
+														'<span>区块高度：</span>'+
+														'<span>'+ result.hotel.blockheight +'</span>'+
+														'</div>'+
+														'<div class="select-welfare-block">'+
+															'<span>区块哈希：</span>'+
+															'<span>'+ result.hotel.blockHash +'</span>'+
+															'</div>'+
+															'<div class="select-welfare-block">'+
+																'<span>事务哈希：</span>'+
+																'<span>'+ result.hotel.txHash +'</span>'+
+																'</div>'+
+																'</div>';
+								$('#cut').html('');
+								$('#cut').html(html);
+								$('#balance').html('');
+								$('#balance').html(result.balance);
+							}
+						})
+					}
+				}
+
+				function stateTwo(){
+					var backcolor=$('#statetwo').css('background-color');
+					if(backcolor=='rgba(0, 0, 0, 0)'){
+						$.ajax({
+							url: "switchSelect?id=2",
+							success: function (result) {
+								$('#statetwo').css({'background-color':'rgb(51, 51, 51)','color':'rgb(255, 255, 255)'});
+								$('#statefirst').css({'background-color':'rgba(0, 0, 0, 0)','color':'rgb(0, 0, 0)'});
+								var html='<div class="select-welfare-kv">'+
+									'<div class="select-welfare-block">'+
+										'<span>景点名称：</span>'+
+										'<span>'+ result.sights.name +'</span>'+
+										'</div>'+
+										'<div class="select-welfare-block">'+
+											'<span>活动名称：</span>'+
+											'<span>'+ result.sights.activity +'</span>'+
+											'</div>'+
+											'<div class="select-welfare-block">'+
+												'<span>活动时间：</span>'+
+												'<span>'+ result.sights.time +'</span>'+
+											'</div>'+
+											'<div class="select-welfare-block">'+
+												'<span>消费积分：</span>'+
+												'<span>'+ result.sights.amount +'</span>'+
+											'</div>'+
+											'</div>'+
+											'<div class="select-welfare-kv">'+
+												'<div class="select-welfare-block">'+
+													'<span>区块高度：</span>'+
+													'<span>'+ result.sights.blockheight +'</span>'+
+												'</div>'+
+												'<div class="select-welfare-block">'+
+													'<span>区块哈希：</span>'+
+													'<span>'+ result.sights.blockHash +'</span>'+
+													'</div>'+
+												'<div class="select-welfare-block">'+
+													'<span>事务哈希：</span>'+
+													'<span>'+ result.sights.txHash +'</span>'+
+												'</div>'+
+											'</div>';
+								$('#cut').html('');
+								$('#cut').html(html);
+								$('#balance').html('');
+								$('#balance').html(result.balance);
+							}
+						})
+					}
+				}
+		</script>
+	</body>
+</html>

@@ -53,10 +53,6 @@ router.get('/saveTransfer',async function(req, res, next){
     };   
 })
 
-router.get('/test',function(req, res, next){
-    res.send(global.inherit[global.inherit.length-1]);
-})
-
 router.get('/getsuccess',function(req, res, next){
     var id=req.query.id;
     if(id==1){

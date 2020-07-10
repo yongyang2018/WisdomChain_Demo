@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>权益积分首页</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/integral/home.css" />
+	</head>
+	<body>
+		<div class="home-box">
+			<ul class="section-ui">
+				<li>
+					<div class="li-div-title">
+						<img src="/images/integral/integral-jiudian.png" >
+						<a class="item-title" href="/integral/getHotel">酒店</a>
+					</div>
+				</li>
+				<li>
+					<div class="li-div-title">
+						<img src="/images/integral/integral-jingdian.png">
+						<a class="item-title" onclick="into()">景点</a>
+					</div>
+				</li>
+
+				<li>
+					<div class="li-div-title">
+						<img src="/images/integral/integral-user.png" >
+						<a class="item-title" onclick="select()">游客</a>
+					</div>
+				</li>
+
+			</ul>
+			<div class="paompt">
+				<div class="paompt-item">
+					<span>酒店分配地址：</span>
+					<span><%= from %></span>
+				</div>
+				<div class="paompt-item">
+					<span>景点分配地址：</span>
+					<span><%= scenic %></span>
+				</div>
+				<div class="paompt-item">
+					<span>游客分配地址：</span>
+					<span><%= to %></span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function into(){
+			$.ajax({
+				url: "integral/checkHotel",
+				success: function (result) {
+					if (!result) {
+						window.location.href="/integral/getSights";
+					}else{
+						alert("暂无酒店发放积分，请稍后再试！");
+					}
+				}
+			});
+		};
+
+		function select(){
+			$.ajax({
+				url: "integral/checkSelect",
+				success: function (result) {
+					if (result) {
+						window.location.href="/integral/getSelect";
+					}else{
+						alert("暂无游客信息访问！");
+					}
+				}
+			});
+		}
+	</script>
+</html>

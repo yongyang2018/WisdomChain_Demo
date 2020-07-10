@@ -10,7 +10,7 @@ var common=new Common();
 
 var indexRouter = require('./routes/countersign/index');
 var inheritRouter = require('./routes/inherit/index');
-var blockRouter = require('./routes/block');
+var integralRouter = require('./routes/integral/index');
 
 var app = express();
 
@@ -26,11 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'keystore')));
+app.use(express.static(path.join(__dirname, 'keystore')));
 
 app.use('/sign', indexRouter);
 app.use('/inherit', inheritRouter);
-app.use('/block', blockRouter);
+app.use('/integral', integralRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,6 +52,7 @@ global.address=[];
 global.undone=[];
 global.finish=[];
 global.inherit=[];
+global.integral=[];
 
 
 function init(){
