@@ -57,9 +57,9 @@ global.integral=[];
 
 function init(){
 
-  const files = fs.readdirSync('keystore/');
+  const files = fs.readdirSync(__dirname +'/keystore/');
   files.forEach(function(item,index){
-    fs.readFile('keystore/'+item,async function (err, data){
+    fs.readFile(__dirname +'/keystore/'+item,async function (err, data){
       if(err){
         console.log("init error");
         return;
