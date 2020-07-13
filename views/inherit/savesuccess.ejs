@@ -42,10 +42,7 @@
 					<img src="/images/countersign/success.png" >
 					<div class="success-title">
 						<div class="">
-							恭喜您信息登记成功！以下是您的上链哈希：
-						</div>
-						<div class="val">
-							<%= txHash %>（请妥善保管）
+							恭喜您信息登记成功！等待区块链服务平台审核中！
 						</div>
 					</div>
 					<div class="text-center">
@@ -58,11 +55,7 @@
 		<script type="text/javascript">
 			window.onload = function() {
 					document.getElementById("confirm").onclick = function() {
-						if(<%= id %>==1){
-							window.location.href="/inherit/";
-						}else{
-							window.location.href="/inherit/";
-						}
+						window.location.href="/inherit/getInto";
 					}
 				}
 		</script>

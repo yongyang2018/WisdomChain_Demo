@@ -14,13 +14,13 @@ class Inherit{
         return traninfo;
     }
 
-    saveTransfer(name,message,height,txHash){
+    saveTransfer(name,message,height){
         // this.checkTransferState();
         var transfer={
             'name':name,
             'message':message,
             'height':height,
-            'txHash':txHash,
+            'txHash':'',
             'blockHash':'',
             'blockheight':0
         };
@@ -30,6 +30,14 @@ class Inherit{
             'getinfo':null
         };
         global.inherit.push(info);
+    }
+
+    update(txHash){
+        var info=global.inherit[global.inherit.length-1];
+        var transfer=info.transfer;
+        transfer.txHash=txHash;
+        info.transfer=transfer;
+        global.inherit[global.inherit.length-1]=info;
     }
 
     checkTransferState(){

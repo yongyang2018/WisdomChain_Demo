@@ -15,11 +15,21 @@
 			<div class="">
 				<div class="outer">
 					<div class="box-frame">
-						<div class="select-sender-title">
-							查询信息
+						<div class="select-sender-title"style="font-weight: 600;">
+							继承人领取信息
+						</div>
+						<div class=""style="font-size: 30px; text-align: center;">
+							当前区块高度><%= info.transfer.height %>，符合领取条件。
+						</div>
+						<div class="text-center">
+							<% if(info.state<=1){ %>
+								<button class="box-but" id="confirm-receipt" onclick="sendGet()">确认领取</button>
+							<% }else{ %>
+								<div style="margin-bottom:5%"></div>
+							<% } %>
 						</div>
 						<div class="select-sender-menu">
-							<div class="select-sender-item" onclick="stateFirst()" id="statefirst" style="background-color: #88CDF8;cursor:pointer">1</div>
+							<div class="select-sender-item" onclick="stateFirst()" id="statefirst" style="background-color: #515151;color: #FFFFFF;">1</div>
 							<div class="select-sender-mid"></div>
 							<div class="select-sender-item" onclick="stateTwo()" id="statetwo" style="cursor:pointer">2</div>
 						</div>
@@ -60,14 +70,41 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+
+			function sendGet(){
+				$.ajax({
+					url: "checkTransfer",
+					success: function (result) {
+						if(result){
+							$.ajax({
+								url: "saveGet",
+								success: function (result) {
+									if (result!=null) {
+										window.location.href="/inherit/getsuccess?id=2&txHash="+result;
+									}else{
+										alert("未到可领取高度，请稍后再试！");
+										return;
+									}
+								}
+							});
+						}else{
+							alert("登记信息还未确认，请稍后再试！");
+							return;
+						}
+					}
+				})
+			}
+
 			function stateFirst(){
-				var color=$('#statefirst').css('background-color');
-				if(color!='rgb(136, 205, 248)'){
+				var backcolor=$('#statefirst').css('background-color');
+				var color=$('#statefirst').css('color');
+				console.log('backcolor:'+backcolor+'--->'+color);
+				if(backcolor=='rgba(0, 0, 0, 0)'){
 					$.ajax({
 						url: "switchselect?id=1",
 						success: function (result) {
-							$('#statefirst').css({'background-color':'#88CDF8'});
-							$('#statetwo').css({'background-color':'rgba(0, 0, 0, 0)'});
+							$('#statetwo').css({'background-color':'rgba(0, 0, 0, 0)','color':'rgb(0, 0, 0)'});
+							$('#statefirst').css({'background-color':'rgb(81, 81, 81)','color':'rgb(255, 255, 255)'});
 							var html='<div class="select-sender-block"style="margin-top: 40px;">'+
 									'<span>区块高度：</span>'+
 									'<span>'+result.blockheight+'</span>'+
@@ -88,13 +125,15 @@
 			}
 
 			function stateTwo(){
-				var color=$('#statetwo').css('background-color');
-				if(color=='rgba(0, 0, 0, 0)'){
+				var backcolor=$('#statetwo').css('background-color');
+				var color=$('#statetwo').css('color');
+				console.log('backcolor:'+backcolor+'--->'+color);
+				if(backcolor=='rgba(0, 0, 0, 0)'){
 					$.ajax({
 						url: "switchselect?id=2",
 						success: function (result) {
-							$('#statefirst').css({'background-color':'rgba(0, 0, 0, 0)'});
-							$('#statetwo').css({'background-color':'#88CDF8'});
+							$('#statefirst').css({'background-color':'rgba(0, 0, 0, 0)','color':'rgb(0, 0, 0)'});
+							$('#statetwo').css({'background-color':'rgb(81, 81, 81)','color':'rgb(255, 255, 255)'});
 							var html='<div class="select-sender-block"style="margin-top: 40px;">'+
 									'<span>区块高度：</span>'+
 									'<span>'+result.blockheight+'</span>'+

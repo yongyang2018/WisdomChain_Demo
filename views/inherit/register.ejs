@@ -15,8 +15,8 @@
 			<div class="">
 				<div class="outer">
 					<div class="box-frame">
-						<div class="register-title">
-							请认真填写以下表格内容，以便数据真实可靠
+						<div class="register-title" style="font-weight: 600;">
+							登记方信息填写
 						</div>
 						<div class="register-kv">
 							<div class="register-item">
@@ -39,7 +39,7 @@
 	
 						</div>
 						<div class="text-center">
-							<button class="box-but" onclick="register()">存证上链</button>
+							<button class="box-but" onclick="register()">保存登记</button>
 						</div>
 					</div>
 				</div>
@@ -70,18 +70,7 @@
 					alert("请正确输入区块高度")
 					return;
 				}
-				$.ajax({
-					url: "saveTransfer?name="+name+"&message="+message+"&num="+num,
-					async: false, //设置为同步请求
-					success: function (result) {
-						if (result != null) {
-							alert("广播成功，等待确认中")
-							window.location.href="/inherit/getsuccess?id=1&txHash="+result;
-						}else{
-							alert("广播失败，请稍后再试！");
-						}
-					}
-				});
+				window.location.href='/inherit/saveTransfer?name='+name+'&message='+message+'&num='+num;
 			}
 		</script>
 		

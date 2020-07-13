@@ -43,14 +43,20 @@ router.get('/getfrom',async function(req, res, next){
 
 router.get('/saveTransfer',async function(req, res, next){
     var name=req.query.name, message=req.query.message, height=req.query.num;
-    var traninfo=await inherit.sendTransfer(height);
+    inherit.saveTransfer(name,message,height); 
+    res.render('inherit/savesuccess');
+})
+
+router.get('/sendTransfer',async function(req, res, next){
+    var transfer=global.inherit[global.inherit.length-1];
+    var traninfo=await inherit.sendTransfer(transfer.height);
     var result=await rpc.sendTransaction(traninfo.transaction);
     if(result==1){
-        inherit.saveTransfer(name,message,height,traninfo.txHash);
+        inherit.update(traninfo.txHash);
         res.send(traninfo.txHash);//广播成功
     }else{
         res.send(null);//广播失败
-    };   
+    };  
 })
 
 router.get('/getsuccess',function(req, res, next){
