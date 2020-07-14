@@ -31,6 +31,7 @@ const  scheduleClear = ()=>{
     global.finish=[];
     global.inherit=[];
     global.integral=[];
+    console.log("缓存清除成功："+new Date());
   });
 }
 
