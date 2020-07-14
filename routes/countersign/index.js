@@ -24,6 +24,18 @@ const  scheduleCronstyle = ()=>{
     }); 
 }
 
+const  scheduleClear = ()=>{
+  schedule.scheduleJob('30 1 1 1 * *',async function(){
+    global.address=[];
+    global.undone=[];
+    global.finish=[];
+    global.inherit=[];
+    global.integral=[];
+  });
+}
+
+scheduleClear();
+
 scheduleCronstyle();
 
 router.get('/', function(req, res, next) {
