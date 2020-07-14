@@ -16,13 +16,13 @@ const  scheduleCronstyle = ()=>{
             const t=await rpc.getTransaction(info.transfer.txHash);
             if(t!=null){
                 inherit.updateTransfer(t.blockHeight,t.blockHash,info);
-                console.log("转发资产哈希："+info.transfer.txHash+" 上链成功");
+                console.log("The forward asset hash: "+info.transfer.txHash+" Chain on the successful");
             }
           }else if(info.state==2){
             const t=await rpc.getTransaction(info.getinfo.txHash);
             if(t!=null){
                 inherit.updateGet(t.blockHeight,t.blockHash,info);
-                console.log("获取资产哈希："+info.getinfo.txHash+" 上链成功");
+                console.log("Get the asset hash："+info.getinfo.txHash+" Chain on the successful");
             }
           }
         }

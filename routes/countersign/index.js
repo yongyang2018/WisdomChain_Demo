@@ -17,7 +17,7 @@ const  scheduleCronstyle = ()=>{
             const t=await rpc.getTransaction(undone.transHash);
             if(t!=null){
               common.UndoneToFinish(t.blockHeight,t.blockHash);
-              console.log(undone.transHash+" 上链成功");
+              console.log(undone.transHash+" Chain on the successful");
             }
           }
         }
@@ -31,7 +31,7 @@ const  scheduleClear = ()=>{
     global.finish=[];
     global.inherit=[];
     global.integral=[];
-    console.log("缓存清除成功："+new Date());
+    console.log("Cache cleared successfully: "+new Date());
   });
 }
 

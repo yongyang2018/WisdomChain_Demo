@@ -16,13 +16,13 @@ const  scheduleCronstyle = ()=>{
             const t=await rpc.getTransaction(info.hotel.txHash);
             if(t!=null){
                 integral.updateHotel(t.blockHeight,t.blockHash);
-                console.log("酒店发放积分："+info.hotel.txHash+" 上链成功");
+                console.log("Hotels issue bonus points: "+info.hotel.txHash+" Chain on the successful");
             }
           }else if(info.state==2){
             const t=await rpc.getTransaction(info.sights.txHash);
             if(t!=null){
                 integral.updateSights(t.blockHeight,t.blockHash);
-                console.log("景点消耗积分："+info.sights.txHash+" 上链成功");
+                console.log("Scenic spot consumption points: "+info.sights.txHash+" Chain on the successful");
             }
           }
         }

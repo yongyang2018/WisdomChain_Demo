@@ -79,6 +79,6 @@ function init(){
 }
 
 init();
-console.log("程序启动成功");
+console.log("The program started successfully.");
 
 module.exports = app;
